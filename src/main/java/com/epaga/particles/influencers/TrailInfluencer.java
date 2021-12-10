@@ -137,7 +137,10 @@ public class TrailInfluencer extends ParticleInfluencer {
   public void setTrailmat(Material trailmat) {
     this.trailmat = trailmat;
 
-    initializeInfluencer(emitter);
+    // need to check if we have been assigned or not
+    // this should be called when added to an emitter
+    if (emitter != null)
+      initializeInfluencer(emitter);
   }
 
   @Override
