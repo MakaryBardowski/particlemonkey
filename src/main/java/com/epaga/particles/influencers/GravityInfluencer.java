@@ -69,7 +69,7 @@ public class GravityInfluencer extends ParticleInfluencer {
 
 			// transform so the gravity applies according to the world
 			if (emitter.getParticlesFollowEmitter()) {
-				emitter.getWorldTransform().transformVector(store, store);
+				emitter.getWorldRotation().mult(store, store);
 			}
 			p.velocity.x -= store.x * tpf;
 			p.velocity.y -= store.y * tpf;

@@ -232,6 +232,10 @@ public class ParticleDataTriMesh extends ParticleDataMesh {
                 up.set(cam.getUp());
                 left.set(cam.getLeft());
                 dir.set(cam.getDirection());
+
+                // now rotate to face take into account of emitter rotation
+                left = emitter.getWorldRotation().inverse().multLocal(left);
+                up = emitter.getWorldRotation().inverse().multLocal(up);
                 break;
               case UNIT_X:
                 up.set(Vector3f.UNIT_Y);
@@ -274,7 +278,7 @@ public class ParticleDataTriMesh extends ParticleDataMesh {
               tempV3.set(p.position);
             } else {
               tempV3.set(p.position);
-              //tempV3.set(p.position).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition).divide(8f));
+              tempV3.set(p.position).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition));//.divide(8f));
               //tempV3 = particles.getNode().getWorldRotation().inverse().multLocal(tempV3);
             }
 

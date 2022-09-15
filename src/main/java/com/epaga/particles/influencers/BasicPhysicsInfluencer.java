@@ -77,7 +77,7 @@ public class BasicPhysicsInfluencer extends ParticleInfluencer {
 
     collisionMesh.collideWith(tempRay, tempResults);
 
-    // 𝑟=𝑑−2(𝑑⋅𝑛)𝑛
+    // r=d-2(d * n)n
     if (tempResults.size() > 0) {
       for (int i = 0; i < tempResults.size(); i++) {
         CollisionResult result = tempResults.getCollision(i);
