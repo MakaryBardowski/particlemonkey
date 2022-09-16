@@ -5,14 +5,8 @@ This is a particle emitter implementation based on some early code from t0neg0d'
 **Gradle**
 -
 ``` groovy
-repositories {
-    maven {
-        url  "https://dl.bintray.com/jeddic/EpagaTools" 
-    }
-}
-
 dependencies {
-    compile 'com.epaga:particlemonkey:1.0.1'
+    implementation 'com.epagagames:particlemonkey:1.1.0'
 }
 ```
 
