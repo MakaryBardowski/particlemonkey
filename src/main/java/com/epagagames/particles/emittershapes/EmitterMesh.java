@@ -39,6 +39,7 @@ import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.material.Material;
 import com.jme3.math.FastMath;
+import com.jme3.math.Transform;
 import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
@@ -55,7 +56,7 @@ import java.io.IOException;
  * @author Jeddic
  */
 public class EmitterMesh extends EmitterShape {
-	private Mesh mesh;
+	private Geometry mesh;
 	private int triangleIndex;
 	private Triangle triStore = new Triangle();
 	Vector3f p1 = new Vector3f();
@@ -70,13 +71,13 @@ public class EmitterMesh extends EmitterShape {
 
 	}
 
-	public EmitterMesh(Mesh mesh) {
+	public EmitterMesh(Geometry mesh) {
 		setShape(mesh);
 	}
 
 	@Override
 	public Spatial getDebugShape(Material mat, boolean ignoreTransforms) {
-		Geometry geometry = new Geometry("DebugShape", mesh);
+		Geometry geometry = new Geometry("DebugShape", mesh.getMesh());
 		geometry.setMaterial(mat);
 		//geometry.setIgnoreTransform(ignoreTransforms);
 		return geometry;
@@ -86,7 +87,7 @@ public class EmitterMesh extends EmitterShape {
 	 * Sets the mesh to use as the particles shape
 	 * @param mesh The mesh to use as the particles shape
 	 */
-	public final void setShape(Mesh mesh) {
+	public final void setShape(Geometry mesh) {
 		this.mesh = mesh;
 		triCount = mesh.getTriangleCount();
 	}
@@ -95,7 +96,7 @@ public class EmitterMesh extends EmitterShape {
 	 * Returns the mesh used as the particle particles shape
 	 * @return The particle particles shape mesh
 	 */
-	public Mesh getMesh() {
+	public Geometry getMesh() {
 		return this.mesh;
 	}
 	
@@ -104,9 +105,7 @@ public class EmitterMesh extends EmitterShape {
 	 */
 	public void setNext() {
 		triangleIndex = FastMath.rand.nextInt(triCount);
-		mesh.getTriangle(triangleIndex, triStore);
-		triStore.calculateCenter();
-		triStore.calculateNormal();
+		setNext(triangleIndex);
 	}
 	
 	/**
@@ -114,7 +113,12 @@ public class EmitterMesh extends EmitterShape {
 	 * @param triangleIndex The index of the face to set as the particle emission point
 	 */
 	public void setNext(int triangleIndex) {
-		mesh.getTriangle(triangleIndex, triStore);
+		Mesh m = mesh.getMesh();
+		Transform transform = mesh.getWorldTransform();
+		m.getTriangle(triangleIndex, p1, p2, p3);
+		transform.transformVector(p1, triStore.get1());
+		transform.transformVector(p2, triStore.get2());
+		transform.transformVector(p3, triStore.get3());
 		triStore.calculateCenter();
 		triStore.calculateNormal();
 	}
@@ -171,7 +175,7 @@ public class EmitterMesh extends EmitterShape {
 	public void read(JmeImporter im) throws IOException {
 		super.read(im);
 		InputCapsule ic = im.getCapsule(this);
-		mesh = (Mesh)ic.readSavable("mesh", new TriangleEmitterShape(1));
+		mesh = (Geometry)ic.readSavable("mesh", new TriangleEmitterShape(1));
 		triCount = mesh.getTriangleCount();
 
 	}
