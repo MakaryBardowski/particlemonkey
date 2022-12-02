@@ -67,12 +67,34 @@ public class EmitterMesh extends EmitterShape {
 	Vector3f result = new Vector3f();
 	private int triCount;
 
+	private boolean emitFromWorldSpace = true;
+
 	public EmitterMesh() {
 
 	}
 
-	public EmitterMesh(Geometry mesh) {
-		setShape(mesh);
+	public EmitterMesh(Geometry geometry) {
+		setShape(geometry);
+	}
+
+	/**
+	 * Emitter Mesh
+	 *
+	 * @param geometry - The geometry to emit from
+	 * @param worldSpace - if true, values passed to the emitter will be based on the world position of the mesh.
+	 *                     If false, it will only use the local translation.
+	 */
+	public EmitterMesh(Geometry geometry, boolean worldSpace) {
+		emitFromWorldSpace = worldSpace;
+		setShape(geometry);
+	}
+
+	public boolean isEmitFromWorldSpace() {
+		return emitFromWorldSpace;
+	}
+
+	public void setEmitFromWorldSpace(boolean emitFromWorldSpace) {
+		this.emitFromWorldSpace = emitFromWorldSpace;
 	}
 
 	@Override
@@ -115,7 +137,8 @@ public class EmitterMesh extends EmitterShape {
 	 */
 	public void setNext(int triangleIndex) {
 		Mesh m = mesh.getMesh();
-		Transform transform = mesh.getWorldTransform();
+		Transform transform = emitFromWorldSpace ? mesh.getWorldTransform()
+				                                     : mesh.getLocalTransform();
 		m.getTriangle(triangleIndex, p1, p2, p3);
 		transform.transformVector(p1, triStore.get1());
 		transform.transformVector(p2, triStore.get2());
