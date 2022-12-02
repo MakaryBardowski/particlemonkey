@@ -155,10 +155,8 @@ public class TrailInfluencer extends ParticleInfluencer {
   public void update(ParticleData p, float tpf) {
     // Trail update info
     boolean add = false;
-    boolean start = false;
     if (p.trailSegments.size() == 0) {
       add = true;
-      start = true;
     } else {
       // are we close enough to add a new segment
       ParticleTrailPoint last = p.trailSegments.getLast();
@@ -173,7 +171,7 @@ public class TrailInfluencer extends ParticleInfluencer {
     // add particle trail point
     if (add) {
       p.trailSegments.addLast(new ParticleTrailPoint(
-          start ? p.initialPosition : p.position,
+          p.position,
           p.velocity,
           useParticleSize ? p.size : trailSize.getValue(0.0f, p.randomValue),
           p.color,

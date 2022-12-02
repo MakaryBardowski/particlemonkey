@@ -242,13 +242,13 @@ public class ParticleDataTrails extends ParticleDataMesh {
     Vector3f test = left.clone();
 
     positions.position(index);
-
-    if (emitter.getParticlesFollowEmitter()) {
-      tempV3.set(last.position);
-    } else {
-      tempV3.set(last.position).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition).divide(8f));
-      //tempV3 = particles.getNode().getWorldRotation().inverse().multLocal(tempV3);
-    }
+    tempV3.set(last.position);
+//    if (emitter.getParticlesFollowEmitter()) {
+//      tempV3.set(last.position);
+//    } else {
+//      tempV3.set(last.position).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition).divide(8f));
+//      //tempV3 = particles.getNode().getWorldRotation().inverse().multLocal(tempV3);
+//    }
 
     up.set(last.velocity).crossLocal(test).normalizeLocal();
     left.set(last.velocity).crossLocal(up).normalizeLocal();
@@ -263,12 +263,12 @@ public class ParticleDataTrails extends ParticleDataMesh {
         .put(tempV3.z - left.z);// + up.z);
 
 
-    if (emitter.getParticlesFollowEmitter()) {
       tempV3.set(current.position);
-    } else {
-      tempV3.set(current.position).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition).divide(8f));
-      //tempV3 = particles.getNode().getWorldRotation().inverse().multLocal(tempV3);
-    }
+//    if (emitter.getParticlesFollowEmitter()) {
+//    } else {
+//      tempV3.set(current.position).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition).divide(8f));
+//      //tempV3 = particles.getNode().getWorldRotation().inverse().multLocal(tempV3);
+//    }
 
     up.set(current.velocity).crossLocal(test).normalizeLocal();
     left.set(current.velocity).crossLocal(up).normalizeLocal();

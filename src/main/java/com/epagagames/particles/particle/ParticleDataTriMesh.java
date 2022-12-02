@@ -234,8 +234,10 @@ public class ParticleDataTriMesh extends ParticleDataMesh {
                 dir.set(cam.getDirection());
 
                 // now rotate to face take into account of emitter rotation
-                left = emitter.getWorldRotation().inverse().multLocal(left);
-                up = emitter.getWorldRotation().inverse().multLocal(up);
+                if (emitter.getParticlesFollowEmitter()) {
+                  left = emitter.getWorldRotation().inverse().multLocal(left);
+                  up = emitter.getWorldRotation().inverse().multLocal(up);
+                }
                 break;
               case UNIT_X:
                 up.set(Vector3f.UNIT_Y);
@@ -278,8 +280,19 @@ public class ParticleDataTriMesh extends ParticleDataMesh {
               tempV3.set(p.position);
             } else {
               tempV3.set(p.position);
-              tempV3.set(p.position).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition));//.divide(8f));
-              //tempV3 = particles.getNode().getWorldRotation().inverse().multLocal(tempV3);
+              //tempV3.set(tempV3).addLocal(p.initialPosition);//.divide(8f));
+              //tempV3.set(tempV3).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition));//.divide(8f));
+//              Vector3f t = p.initialPosition.subtract(p.position);
+//              tempV3.set(emitter.getWorldTranslation());
+//              tempV3.subtractLocal(t);
+              //tempV3.set(p.position);//.addLocal(p.initialPosition);
+
+              // JME CODE
+//              emitter.getWorldRotation().mult(velocity, velocity);
+//              initialPosition.set(emitter.getWorldTranslation());
+//              initialPosition.addLocal(position);
+//              position.set(initialPosition);
+
             }
 
             positions.put(tempV3.x + left.x + up.x)

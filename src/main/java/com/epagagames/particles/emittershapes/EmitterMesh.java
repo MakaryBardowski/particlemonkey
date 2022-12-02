@@ -79,6 +79,7 @@ public class EmitterMesh extends EmitterShape {
 	public Spatial getDebugShape(Material mat, boolean ignoreTransforms) {
 		Geometry geometry = new Geometry("DebugShape", mesh.getMesh());
 		geometry.setMaterial(mat);
+		geometry.setLocalTransform(mesh.getWorldTransform().clone());
 		//geometry.setIgnoreTransform(ignoreTransforms);
 		return geometry;
 	}

@@ -154,12 +154,6 @@ public class ParticleDataPointMesh extends ParticleDataMesh {
         for (int i = 0; i < particles.length; i++){
             ParticleData p = particles[i];
             temp.set(p.position);
-            if (emitter.getParticlesFollowEmitter()) {
-                temp.set(p.position);
-            } else {
-                temp.set(p.position).subtractLocal(emitter.getWorldTranslation().subtract(p.initialPosition).divide(8f));
-                //temp = emitter.getWorldRotation().inverse().multLocal(temp);
-            }
 
             positions.put(temp.x)
                      .put(temp.y)

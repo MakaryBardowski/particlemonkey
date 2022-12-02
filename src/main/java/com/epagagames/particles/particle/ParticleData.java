@@ -35,6 +35,7 @@ import com.epagagames.particles.Emitter;
 import com.epagagames.particles.influencers.ParticleInfluencer;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
+import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.epagagames.particles.valuetypes.ValueType;
 
@@ -64,9 +65,6 @@ public class ParticleData {
    */
   public final ColorRGBA startColor = new ColorRGBA(1, 1, 1, 1);
   public final ColorRGBA color = new ColorRGBA(0, 0, 0, 0);
-  /**
-   * The position of the particles when the particle was released.
-   */
   public final Vector3f initialPosition = new Vector3f();
   public final Vector3f initialVelocity = new Vector3f();
   public final Vector3f randomOffset = new Vector3f();
@@ -214,12 +212,9 @@ public class ParticleData {
 		);
 
     if (!emitter.getParticlesFollowEmitter()) {
+//      initialPosition.set(emitter.getWorldTranslation()).addLocal(position);
+//      position.set(initialPosition);
       emitter.getWorldRotation().mult(velocity, velocity);
-      initialPosition.set(emitter.getWorldTranslation());
-      initialPosition.addLocal(position);
-      position.set(initialPosition);
-    } else {
-      initialPosition.set(position);
     }
 
     initialVelocity.set(velocity);
@@ -243,6 +238,7 @@ public class ParticleData {
   public void reset() {
     active = false;
     position.zero();
+    initialPosition.zero();
     velocity.zero();
     color.set(0,0,0,0);
     //size = 0.0f;
