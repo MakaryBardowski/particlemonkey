@@ -39,6 +39,7 @@ import com.jme3.export.OutputCapsule;
 import com.jme3.material.Material;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
+import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
@@ -72,11 +73,11 @@ public class EmitterCone extends EmitterShape {
     float height = emitFromVolume ? length : 1.0f;
     float secondRad = (float) (radius + Math.atan(angle) * (height));
     Cylinder cylinder = new Cylinder(2, 20, radius, secondRad, height, false, false);
-    Geometry geometry = new Geometry("DebugShape", cylinder);
-    geometry.setMaterial(mat);
-    geometry.rotate(FastMath.PI / 2.0f, 0.0f, 0.0f);
+    Geometry clyinderGeo = new Geometry("DebugShape", cylinder);
+    clyinderGeo.setMaterial(mat);
+    clyinderGeo.rotate(FastMath.PI / 2.0f, 0.0f, 0.0f);
     //geometry.setIgnoreTransform(ignoreTransforms);
-    return geometry;
+    return clyinderGeo;
   }
 
 

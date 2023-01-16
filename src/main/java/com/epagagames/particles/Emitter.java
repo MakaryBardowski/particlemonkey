@@ -609,6 +609,7 @@ public class Emitter extends Node {
     mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
     mat.getAdditionalRenderState().setWireframe(true);
 
+
     if (debugEmitter) {
       testEmitterShape = emitterShape.getDebugShape(mat, !particlesFollowEmitter);
       attachChild(testEmitterShape);

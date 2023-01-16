@@ -145,6 +145,39 @@ public class EmitterMesh extends EmitterShape {
 		transform.transformVector(p3, triStore.get3());
 		triStore.calculateCenter();
 		triStore.calculateNormal();
+
+//			Mesh m = mesh.getMesh();
+//
+////		Transform transform = emitFromWorldSpace ? mesh.getWorldTransform()
+////				                                     : mesh.getLocalTransform();
+////		m.getTriangle(triangleIndex, p1, p2, p3);
+////		transform.transformVector(p1, triStore.get1());
+////		transform.transformVector(p2, triStore.get2());
+////		transform.transformVector(p3, triStore.get3());
+////		triStore.calculateCenter();
+////		triStore.calculateNormal();
+//			if(emitFromWorldSpace){
+//				//mesh.setIgnoreTransform(false);
+//				Transform transform = mesh.getWorldTransform();
+//				m.getTriangle(triangleIndex, p1, p2, p3);
+//				transform.transformVector(p1, triStore.get1());
+//				transform.transformVector(p2, triStore.get2());
+//				transform.transformVector(p3, triStore.get3());
+//			}else if(!emitFromWorldSpace){
+//				// mesh.setIgnoreTransform(true);
+//				Transform transform = mesh.getWorldTransform();//mesh.getLocalTransform();
+//
+//				transform.setRotation(mesh.getLocalTransform().getRotation());
+//				transform.setTranslation(mesh.getLocalTransform().getTranslation());
+//
+//				m.getTriangle(triangleIndex, p1, p2, p3);
+//				transform.transformVector(p1, triStore.get1());
+//				transform.transformVector(p2, triStore.get2());
+//				transform.transformVector(p3, triStore.get3());
+//
+//			}
+//			triStore.calculateCenter();
+//			triStore.calculateNormal();
 	}
 	
 	/**

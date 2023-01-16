@@ -32,6 +32,7 @@
 package com.epagagames.particles.particle;
 
 import com.epagagames.particles.Emitter;
+import com.epagagames.particles.emittershapes.EmitterMesh;
 import com.epagagames.particles.influencers.ParticleInfluencer;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
@@ -212,8 +213,11 @@ public class ParticleData {
 		);
 
     if (!emitter.getParticlesFollowEmitter()) {
-//      initialPosition.set(emitter.getWorldTranslation()).addLocal(position);
-//      position.set(initialPosition);
+      // Emitter mesh already handles this because the mesh has its own transform
+      if (!(emitter.getShape() instanceof EmitterMesh)) {
+        initialPosition.set(emitter.getWorldTranslation()).addLocal(position);
+        position.set(initialPosition);
+      }
       emitter.getWorldRotation().mult(velocity, velocity);
     }
 
