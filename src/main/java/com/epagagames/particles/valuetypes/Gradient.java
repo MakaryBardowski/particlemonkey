@@ -67,6 +67,10 @@ public class Gradient implements Savable, Cloneable {
 
   }
 
+  public Gradient(ColorRGBA color) {
+    points.add(new GradPoint(color, 0.0f));
+  }
+
   public Gradient addGradPoint(ColorRGBA color, float x) {
     points.add(new GradPoint(color, x));
     sort();

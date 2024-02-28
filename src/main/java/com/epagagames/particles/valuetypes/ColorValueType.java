@@ -139,14 +139,14 @@ public class ColorValueType implements Savable, Cloneable {
       case GRADIENT: gradient.getValueColor(time, output); break;
       case RANDOM_BETWEEN_GRADIENTS:
         gradient.getValueColor(time, output);
-        gradientTwo.getValueColor(time, store);
-        output.interpolateLocal(store, particleRandom);
+        gradientTwo.getValueColor(time, temp);
+        output.interpolateLocal(temp, particleRandom);
         break;
       case RANDOM_BETWEEN_COLORS:
-        output.r = FastMath.interpolateLinear(FastMath.nextRandomFloat(), color.r, colorTwo.r);
-        output.g = FastMath.interpolateLinear(FastMath.nextRandomFloat(), color.g, colorTwo.g);
-        output.b = FastMath.interpolateLinear(FastMath.nextRandomFloat(), color.b, colorTwo.b);
-        output.a = FastMath.interpolateLinear(FastMath.nextRandomFloat(), color.a, colorTwo.a);
+        output.r = FastMath.interpolateLinear(particleRandom, color.r, colorTwo.r);
+        output.g = FastMath.interpolateLinear(particleRandom, color.g, colorTwo.g);
+        output.b = FastMath.interpolateLinear(particleRandom, color.b, colorTwo.b);
+        output.a = FastMath.interpolateLinear(particleRandom, color.a, colorTwo.a);
       break;
       default: break;
     }

@@ -125,6 +125,10 @@ public class VectorValueType implements Savable, Cloneable {
     this.type = Type.CONSTANT;
   }
 
+  public void setMax(Vector3f max) {
+    this.second = max;
+  }
+
   public void setValue(Vector3f min, Vector3f max) {
     this.value = min;
     this.second = max;
