@@ -121,7 +121,7 @@ public class VectorValueType implements Savable, Cloneable {
     this.value = value;
     x1 = y1 = z1 = null;
     x2 = y2 = z2 = null;
-    value = second = null;
+    second = null;
     this.type = Type.CONSTANT;
   }
 
@@ -134,7 +134,6 @@ public class VectorValueType implements Savable, Cloneable {
     this.second = max;
     x1 = y1 = z1 = null;
     x2 = y2 = z2 = null;
-    value = second = null;
     this.type = Type.RANDOM;
   }
 
